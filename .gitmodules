@@ -1,0 +1,3 @@
+[submodule "spbstu-processing-data"]
+	path = spbstu-processing-data
+	url = git@github.com:Loupehope/spbstu-processing-data.git
