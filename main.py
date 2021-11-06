@@ -19,7 +19,7 @@ if __name__ == '__main__':
     # ---------------
     # Данные на входе
     file_path = "/Users/vladsuhomlinov/DTMF/sound.wav"
-    numbers = '12A67*'
+    numbers = '123456789abcd*'
 
     # ---------------
     # Записываем
