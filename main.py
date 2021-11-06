@@ -3,6 +3,7 @@ from IO.Reader import *
 
 from Processing.Generator import *
 from Processing.Detector import *
+from Processing.Goertzel import *
 
 from Drivers.SpecInfoDisplayDriver import *
 
@@ -18,17 +19,19 @@ if __name__ == '__main__':
     # ---------------
     # Данные на входе
     file_path = "/Users/vladsuhomlinov/DTMF/sound.wav"
-    numbers = '12234'
+    numbers = '12A67*'
 
     # ---------------
     # Записываем
-    symbols = Generator.generate_from(numbers, .1)
+    symbols = Generator.generate_from(numbers, .25)
     Writer.write(file_path, symbols)
 
     # ---------------
     # Считываем
     rate, data = Reader.read(file_path)
-    Detector.detect(rate, data)
+    detected = Detector.detect(rate, data)
+
+    print("Распознано для " + numbers + ": " + detected)
 
     # Запускаем
     # display_model.display()
