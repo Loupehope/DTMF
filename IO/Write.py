@@ -1,5 +1,4 @@
 import scipy.io.wavfile
-import numpy as np
 
 # Models
 from Models.Signal import *
