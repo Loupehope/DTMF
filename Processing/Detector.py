@@ -21,6 +21,7 @@ class Detector:
                 prev_counter += 1
                 if prev_counter == 9:
                     result += value
+                    prev_counter = 1
             else:
                 prev_counter = 1
                 prev_value = value

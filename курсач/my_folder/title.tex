@@ -1,0 +1,70 @@
+%%% Титульник ВКР / Thesis title 
+%%
+%% добавить лист в pdf-навигацию 
+%% add to pdf navigation menu
+%%
+\pdfbookmark[-1]{\pdfTitle}{tit}
+%%
+\thispagestyle{empty}%
+\makeatletter
+\newgeometry{top=2cm,bottom=2cm,left=3cm,right=1cm,headsep=0cm,footskip=0cm}
+\savegeometry{NoFoot}%
+\makeatother
+
+
+%%% Распечатать версию документа / Print document version
+%%
+
+{\centering%
+	\SPbPU\\
+	{
+		\institute\\
+		\instituteS}
+	\par}%
+
+
+\vspace{0pt plus1fill} %число перед fill = кратность относительно некоторого расстояния fill, кусками которого заполнены пустые места
+
+
+\vspace{0pt plus2fill} %
+
+
+{\centering%
+	
+	\MakeUppercase{\bfseries{\DocType}} \\ 
+
+	\intervalS% %ОБЯЗАТЕЛЬНО ДОБАВИТЬ ОТСТУП, ЕСЛИ ХВАТАЕТ МЕСТА
+	\MakeUppercase{\bfseries{\thesisTitle}}
+	\intervalS% %ОБЯЗАТЕЛЬНО ДОБАВИТЬ ОТСТУП, ЕСЛИ ХВАТАЕТ МЕСТА
+\par}%
+
+{\centering%
+	\noindent	по дисциплине «Методы обработки экспериментальных данных»\\%
+\par}%
+
+
+
+
+\vspace{4mm plus2fill}%
+
+\noindent
+\begin{tabularx}{\linewidth}{lXl}
+	Выполнил              &	   &             \\
+	студент гр.~\group     &    & \Author     \\[\mfloatsep]
+
+	Руководитель 		  &    &             \\
+	\SupervisorDegree, \SupervisorTitle 	  &    & \Supervisor \\[\mfloatsep]
+
+\end{tabularx} %
+
+
+%
+\vspace{0pt plus4fill}% 
+
+
+\begin{center}%
+Санкт-Петербург\\
+2021
+\end{center}%
+\restoregeometry
+\newpage

@@ -5,6 +5,9 @@ from Processing.Generator import *
 from Processing.Detector import *
 from Processing.Goertzel import *
 
+from Drivers.ModelDriver import *
+from Models.RandomModel import *
+
 from Drivers.SpecInfoDisplayDriver import *
 
 import tkinter as tk
@@ -19,7 +22,7 @@ if __name__ == '__main__':
     # ---------------
     # Данные на входе
     file_path = "/Users/vladsuhomlinov/DTMF/sound.wav"
-    numbers = '123456789abcd*'
+    numbers = '3521A'
 
     # ---------------
     # Записываем
