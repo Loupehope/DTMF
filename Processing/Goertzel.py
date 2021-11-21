@@ -19,40 +19,46 @@ class Goertzel:
 
             self.coeff[k] = 2.0 * math.cos(2.0 * math.pi * freq_k / bin_size)
 
-    def get_number(self, freqs):
+    def get_number(self, powers):
         high_freq = .0
         high_freq_temp = .0
         low_freq = .0
         low_freq_temp = .0
 
         for (high, low) in zip(DTMF_HIGH, DTMF_LOW):
-            if freqs[high] > high_freq_temp:
-                high_freq_temp = freqs[high]
+            if powers[high] > high_freq_temp:
+                high_freq_temp = powers[high]
                 high_freq = high
 
-            if freqs[low] > low_freq_temp:
-                low_freq_temp = freqs[low]
+            if powers[low] > low_freq_temp:
+                low_freq_temp = powers[low]
                 low_freq = low
 
         for key in DTMF_TABLE:
             if DTMF_TABLE[key][0] == high_freq and DTMF_TABLE[key][1] == low_freq:
                 return key
 
-    def run(self, sample, is_last_sample):
-        freqs = {}
-
+    def calc_s_n(self, sample_data):
         for freq in DTMF_FREQ:
-            s = self.coeff[freq] * self.s_prev[freq] - self.s_prev2[freq] + sample
+            s = self.coeff[freq] * self.s_prev[freq] - self.s_prev2[freq] + sample_data
             self.s_prev2[freq] = self.s_prev[freq]
             self.s_prev[freq] = s
 
-            if is_last_sample:
-                power = self.s_prev2[freq] ** 2 + self.s_prev[freq] ** 2 -\
-                        self.coeff[freq] * self.s_prev[freq] * self.s_prev2[freq]
-                freqs[freq] = power
+    def calc_power(self) -> {float: float}:
+        powers = {}
 
-        if is_last_sample:
-            return self.get_number(freqs)
-        else:
-            return ""
+        for freq in DTMF_FREQ:
+            power = self.s_prev2[freq] ** 2 + self.s_prev[freq] ** 2 - \
+                    self.coeff[freq] * self.s_prev[freq] * self.s_prev2[freq]
+            powers[freq] = power
+
+        return powers
+
+    def reset(self):
+        self.s_prev = {}
+        self.s_prev2 = {}
+
+        for k in DTMF_FREQ:
+            self.s_prev[k] = .0
+            self.s_prev2[k] = .0
 
