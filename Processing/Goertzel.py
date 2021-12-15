@@ -1,10 +1,10 @@
 import math
-import scipy.io.wavfile
 
 from Helpers.Const import *
 
 
 class Goertzel:
+    # Реализация алгоритма Герцеля.
 
     def __init__(self, sample_rate: int, bin_size: int):
         self.s_prev = {}
@@ -20,6 +20,18 @@ class Goertzel:
             self.coeff[k] = 2.0 * math.cos(2.0 * math.pi * freq_k / bin_size)
 
     def get_number(self, powers):
+        # Возвращает символ соответствующий
+        # полученным частотных компонентам.
+        #
+        # Parameters
+        # ----------
+        # powers : магнитуды частот.
+        #
+        # Returns
+        # -------
+        # key : str
+        #     декодированный DTMF-символ.
+
         high_freq = .0
         high_freq_temp = .0
         low_freq = .0
@@ -39,12 +51,25 @@ class Goertzel:
                 return key
 
     def calc_s_n(self, sample_data):
+        # Вычисляет Sn.
+        #
+        # Parameters
+        # ----------
+        # sample_data : частота дикретизации.
+
         for freq in DTMF_FREQ:
             s = self.coeff[freq] * self.s_prev[freq] - self.s_prev2[freq] + sample_data
             self.s_prev2[freq] = self.s_prev[freq]
             self.s_prev[freq] = s
 
     def calc_power(self) -> {float: float}:
+        # Вычисляет магнитуды частот.
+        #
+        # Returns
+        # -------
+        # powers : {float: float}
+        #     словарь частот и их магнитуд.
+
         powers = {}
 
         for freq in DTMF_FREQ:
@@ -55,10 +80,11 @@ class Goertzel:
         return powers
 
     def reset(self):
+        # Удаляет ранее посчитанные данные.
+
         self.s_prev = {}
         self.s_prev2 = {}
 
         for k in DTMF_FREQ:
             self.s_prev[k] = .0
             self.s_prev2[k] = .0
-

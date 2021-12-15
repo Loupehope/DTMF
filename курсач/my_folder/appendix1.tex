@@ -1,146 +1,292 @@
-\chapter{Краткие инструкции по настройке издательской системы \LaTeX}\label{appendix-MikTeX-TexStudio}							% Заголовок
-%\addcontentsline{toc}{chapter}{Second call for chapters to participate in the book Machine learning in analysis of biomedical and socio-economic data}	% Добавляем его в оглавление
+\chapter{Исходный код}\label{SkinCancerClassifier}
 
-В SPbPU-BCI-template {\itshape автоматически выставляются необходимые настройки и в исходном тексте шаблона приведены примеры оформления текстово-графических объектов}, поэтому авторам достаточно заполнить имеющийся шаблон текстом главы (статьи), не вдаваясь в детали оформления, описанные далее. Возможный <<быстрый старт>> оформления главы (статьи) под Windows следующий\footnote{Внимание! Пример оформления подстрочной ссылки (сноски).}:
-
-\begin{enumerate}
-	\item Установка полной версии MikTeX  \cite{latex-miktex}.  В процессе установки лучше выставить параметр доустановки пакетов <<на лету>>.
+\begin{lstlisting}[language=python]
 	
-	\item Установка TexStudio \cite{latex-texstudio}.
-	
-%		\item установка шрифтов PSCyr для работы с TimesNew\-Roman\-PSMT  	\href{https://github.com/AndreyAkinshin/Russian-Phd-LaTeX-Dissertation-Template/blob/master/PSCyr/Windows.md}{по данной инструкции}. В итоговом документе будет, скорее всего, использован Newton.
-	
-%	\item Переименование следующих файлов, где вместо \texttt{AuthorsSur\-names} необходимо подставить фамилии авторов (можно сокращать до первых четырех букв): 
-%	
-%	\begin{enumerate}
-%		\item Основной файл \texttt{Book\_title\_ch\_Authors\-Sur\-names.tex}.
-%		\item Библиография \texttt{biblio\textbackslash{}Book\_title\_bib\_Authors\-Sur\-na\-mes\-.bib}.
-%		\item Пользовательские настройки (при необходимости), \texttt{common\textbackslash{}Book\_\-tit\-le\_ext\_Authors\-Sur\-names.tex}. 
-%	\end{enumerate}
-%	
-%	\item После открытия основного файла \texttt{Book\_title\_ch\_Authors\-Sur\-names.tex} (с новым названием)   переименовать названия по аналогии в следующих командах \texttt{\textbackslash{}input\{\}}:
-%	
-%	\begin{enumerate}
-%		\item \texttt{biblio/Book\_title\_bib\_Authors\-Sur\-names.bib},
-%		\item \texttt{common/Book\_title\_ext\_Authors\-Sur\-names.tex (при необходимости) }.
-%	\end{enumerate}
-%	
-	
-	\item Запуск TexStudio и компиляция \verb|my_chapter.tex| с помощью команды <<Build\&View>> (например, с помощью двойной зелёной стрелки в верхней панели). {\itshape Иногда, для достижения нужного результата необходимо несколько раз скомпилировать документ.}
-	
-	\item В случае, если не отобразилась библиография, можно
-	
-	\begin{itemize}
-		\item воспользоваться командой Tools $\to$ Commands $\to$ Biber, затем запустив Build\&View;
-		
-		\item настроить автоматическое включение библиографии в настройках Options $\to$ Configure TexStudio $\to$ Build $\to$  Build\&View (оставить по умолчанию, если сборка происходит слишком долго): \texttt{txs:///pdflatex | txs:///biber | txs:///pdflatex | txs:///pdflatex | txs:///\-view-pdf}.
-	\end{itemize}
-	
-\end{enumerate}
+# Таблицы частот для кодирования и декодирования
 
-В случае возникновения ошибок, попробуйте скомпилировать документ до последних действий или внимательно ознакомьтесь с описанием проблемы в log-файле. Бывает полезным переход (по подсказке TexStudio) в нужную строку в pdf-файле или запрос с текстом ошибке в поисковиках. Наиболее вероятной проблемой при первой компиляции может быть отсутствие какого-либо установленного пакета \LaTeX. 
+DTMF_TABLE = {
+    '1': [1209, 697],
+    '2': [1336, 697],
+    '3': [1477, 697],
+    'A': [1633, 697],
 
-В случае корректной работы настройки <<установка на лету>> все дополнительные пакеты будут скачиваться и устанавливаться в автоматическом режиме. Если доустановка пакетов осуществляется медленно (несколько пакетов за один запуск компилятора), то можно попробовать установить их в ручном режиме следующим образом:
+    '4': [1209, 770],
+    '5': [1336, 770],
+    '6': [1477, 770],
+    'B': [1633, 770],
 
-\begin{enumerate}[1.]
-	\item Запустите программу: меню $\to$ все программы $\to$ MikTeX $\to$ Maintenance (Admin) $\to$ MiKTeX Package Manager (Admin).
-	\item Пользуясь поиском, убедитесь, что нужный пакет присутствует, но не установлен (если пакет отсутствует воспользуйтесь сначала MiKTeX Update (Admin)).
-	\item Выделив строку с пакетом (возможно выбрать несколько или вообще все неустановленные пакеты), выполните установку Tools $\to$ Install или с помощью контекстного меню.
-	\item После завершения установки запустите программу MiKTeX Settings (Admin).
-	\item Обновите базу данных имен файлов Refresh FNDB.
-\end{enumerate}
+    '7': [1209, 852],
+    '8': [1336, 852],
+    '9': [1477, 852],
+    'C': [1633, 852],
 
+    '*': [1209, 941],
+    '0': [1336, 941],
+    '#': [1477, 941],
+    'D': [1633, 941],
+}
 
-Для проверки текста статьи на русском языке полезно также воспользоваться настройками Options $\to$ Configure TexStudio $\to$ Language Checking $\to$  Default Language. Если русский язык <<ru\_RU>> не будет доступен в меню выбора, то необходимо вначале выполнить Import Dictionary, скачав из интернета любой русскоязычный словарь. 
+DTMF_FREQ = [1209.0, 1336.0, 1477.0, 1633.0, 697.0, 770.0, 852.0, 941.0]
+DTMF_HIGH = [1209.0, 1336.0, 1477.0, 1633.0]
+DTMF_LOW = [697.0, 770.0, 852.0, 941.0]
 
+# -----------------
+# Класс Reader
+# -----------------
 
-%\chapter{\normalfont\normalsize{}Часто задаваемые вопросы (FAQ)}\label{Appendix-FAQ}							% Заголовок
-%%\addcontentsline{toc}{chapter}{Second call for chapters to participate in the book Machine learning in analysis of biomedical and socio-economic data}	% Добавляем его в оглавление
+class Reader:
 
+    @staticmethod
+    def read(filename: str):
+        # Читает wav файл.
+        #
+        # Parameters
+        # ----------
+        # filename : путь к файлу.
+        #
+        # Returns
+        # -------
+        # rate : int
+        #     Частота дискретизации.
+        # data : numpy array
+        #     Данные файла.
 
-Далее приведены формулы \eqref{eq:Pi-app2}, \eqref{eq:Pi-app2-},  \firef{fig:spbpu_hydrotower-app2}, \firef{fig:spbpu_hydrotower-app2-}, \taref{tab:ToyCompare-app2}, \taref{tab:ToyCompare-app2-}.
+        return scipy.io.wavfile.read(filename)
 
+# -----------------
+# Класс Writer
+# -----------------
 
-\begin{equation}% лучше не оставлять пропущенную строку (\par) перед окружениями для избежания лишних отсупов в pdf
-\label{eq:Pi-app2-} % eq - equations, далее название, ch поставлено для избежания дублирования
-\pi \approx 3,141.
-\end{equation}
+class Writer:
 
-%
-\begin{figure}[ht!] 
-	\center
-	\includegraphics [scale=0.27] {my_folder/images//spbpu_hydrotower}
-	\caption{Вид на гидробашню СПбПУ \cite{spbpu-gallery}} 
-	\label{fig:spbpu_hydrotower-app2-}  
-\end{figure}
+    @staticmethod
+    def write(filename: str, signals: [Signal]):
+        # Записывает данные в wav файл.
+        #
+        # Parameters
+        # ----------
+        # filename : путь к файлу.
+        # signals : массив закодированных DTMF-сигналов.
 
-\begin{table} [htbp]% Пример оформления таблицы
-	\centering\small
-	\caption{Представление данных для сквозного примера по ВКР \cite{Peskov2004}}%
-	\label{tab:ToyCompare-app2-}		
-	\begin{tabular}{|l|l|l|l|l|l|}
-		\hline
-		$G$&$m_1$&$m_2$&$m_3$&$m_4$&$K$\\
-		\hline
-		$g_1$&0&1&1&0&1\\ \hline
-		$g_2$&1&2&0&1&1\\ \hline
-		$g_3$&0&1&0&1&1\\ \hline
-		$g_4$&1&2&1&0&2\\ \hline
-		$g_5$&1&1&0&1&2\\ \hline
-		$g_6$&1&1&1&2&2\\ \hline		
-	\end{tabular}	
-	\normalsize% возвращаем шрифт к нормальному
-\end{table}
+        rate = 0
+        data = np.array([])
 
+        for signal in signals:
+            rate = signal.rate
+            data = np.append(data, signal.np_y_array())
 
+        scipy.io.wavfile.write(filename, rate, data)
+        
+# -----------------
+# Класс Signal
+# -----------------
+    
+ class Signal:
+    # Класс определеяет один DTMF-сигнал.
+    #
+    # Properties
+    # ----------
+    # data : путь к файлу.
+    # symbol : символ DTMF-сигнала.
+    # rate : частота дискретизации.
 
+    # Initialization
+    def __init__(self, data, symbol, rate):
+        self.y_array = data[1]
+        self.symbol = symbol
+        self.rate = rate
 
-\section{Параграф приложения}\label{app-2-1}							
+    def np_y_array(self):
+        # Преобразует данные в numpy array.
+        #
+        # Returns
+        # -------
+        # data : numpy array
+        #     Данные файла.
 
+        return np.array(self.y_array)
+        	
+# -----------------
+# Класс Detector
+# -----------------
 
-\subsection{Название подпараграфа} \label{ch2:subsec-title-abbr} %название по-русски
+class Detector:
 
+    @staticmethod
+    def detect(rate, data) -> str:
+        # Декодирует wav файл.
+        # 
+        # Parameters
+        # ----------
+        # rate : путь к файлу.
+        # data : данные сигнала.
+        # 
+        # Returns
+        # -------
+        # result : str
+        #     декодированная строка сигнала.
 
-Название подпараграфа оформляется с помощью команды  \texttt{\textbackslash{}subsection\{...\}}.
+        result = ""
+        bin_size = int(rate * .25)
+        goertzel = Goertzel(rate, bin_size)
 
-Использование подподпараграфов в основной части крайне не рекомендуется.
-\subsubsection{Название подподпараграфа}\label{ch2:subsubsec-title-abbr} %название по-русски
+        for i in range(0, len(data) - bin_size + 1, bin_size):
+            goertzel.reset()
 
-\begin{equation}% лучше не оставлять пропущенную строку (\par) перед окружениями для избежания лишних отсупов в pdf
-\label{eq:Pi-app2} % eq - equations, далее название, ch поставлено для избежания дублирования
-\pi \approx 3,141.
-\end{equation}
-%
-%
-\begin{figure}[ht!] 
-	\center
-	\includegraphics [scale=0.27] {my_folder/images//spbpu_hydrotower}
-	\caption{Вид на гидробашню СПбПУ \cite{spbpu-gallery}} 
-	\label{fig:spbpu_hydrotower-app2}  
-\end{figure}
-%
+            for j in range(bin_size):
+                goertzel.calc_s_n(data[i + j])
 
+            powers = goertzel.calc_power()
+            symbol = goertzel.get_number(powers)
 
+            result += symbol
 
+        return result
+        
+# -----------------
+# Класс Generator
+# -----------------
+     
+class Generator:
 
-\begin{table}[t!]% Пример оформления таблицы
-	\centering\small
-	\caption{Представление данных для сквозного примера по ВКР \cite{Peskov2004}}%
-	\label{tab:ToyCompare-app2}		
-	\begin{tabular}{|l|l|l|l|l|l|}
-		\hline
-		$G$&$m_1$&$m_2$&$m_3$&$m_4$&$K$\\
-		\hline
-		$g_1$&0&1&1&0&1\\ \hline
-		$g_2$&1&2&0&1&1\\ \hline
-		$g_3$&0&1&0&1&1\\ \hline
-		$g_4$&1&2&1&0&2\\ \hline
-		$g_5$&1&1&0&1&2\\ \hline
-		$g_6$&1&1&1&2&2\\ \hline		
-	\end{tabular}	
-	\normalsize% возвращаем шрифт к нормальному
-\end{table}
+    @staticmethod
+    def generate_from(symbols: str, duration=.25, volume=.25, rate=8000) -> [Signal]:
+        # Кодирует строку в сигнал.
+        #
+        # Parameters
+        # ----------
+        # symbols : строка символов.
+        # duration : длительность одного сигнала.
+        # volume : громкость.
+        # rate : частота дискретизации.
+        #
+        # Returns
+        # -------
+        # generated : [Signal]
+        #     массив DTMF-сигналов.
 
+        generated = []
+
+        for symbol in symbols:
+            generated.append(Generator.calculate(symbol, duration, volume, rate))
+
+        return generated
+
+    @staticmethod
+    def calculate(symbol: str, duration=.25, volume=.25, rate=8000) -> Signal:
+        # Кодирует символ в сигнал.
+        #
+        # Parameters
+        # ----------
+        # symbol : символ.
+        # duration : длительность одного сигнала.
+        # volume : громкость.
+        # rate : частота дискретизации.
+        #
+        # Returns
+        # -------
+        # generated : Signal
+        #     закодированный DTMF-сигналов.
+
+        first_garmonik = GarmonikModel(volume, DTMF_TABLE[symbol.upper()][0], 0, int(duration * rate), 1, 1 / rate) \
+            .trend(0, None)
+        second_garmonik = GarmonikModel(volume, DTMF_TABLE[symbol.upper()][1], 0, int(duration * rate), 1, 1 / rate) \
+            .trend(0, None)
+        final_garmnonik = ModelDriver.add(first_garmonik, second_garmonik)
+
+        return Signal(final_garmnonik, symbol, rate)
+     
+# -----------------
+# Класс Goertzel
+# -----------------
+     
+class Goertzel:
+    # Реализация алгоритма Герцеля.
+
+    def __init__(self, sample_rate: int, bin_size: int):
+        self.s_prev = {}
+        self.s_prev2 = {}
+        self.coeff = {}
+
+        for k in DTMF_FREQ:
+            self.s_prev[k] = .0
+            self.s_prev2[k] = .0
+
+            freq_k = .5 + (bin_size * k) / sample_rate
+
+            self.coeff[k] = 2.0 * math.cos(2.0 * math.pi * freq_k / bin_size)
+
+    def get_number(self, powers):
+        # Возвращает символ соответствующий
+        # полученным частотных компонентам.
+        #
+        # Parameters
+        # ----------
+        # powers : магнитуды частот.
+        #
+        # Returns
+        # -------
+        # key : str
+        #     декодированный DTMF-символ.
+
+        high_freq = .0
+        high_freq_temp = .0
+        low_freq = .0
+        low_freq_temp = .0
+
+        for (high, low) in zip(DTMF_HIGH, DTMF_LOW):
+            if powers[high] > high_freq_temp:
+                high_freq_temp = powers[high]
+                high_freq = high
+
+            if powers[low] > low_freq_temp:
+                low_freq_temp = powers[low]
+                low_freq = low
+
+        for key in DTMF_TABLE:
+            if DTMF_TABLE[key][0] == high_freq and DTMF_TABLE[key][1] == low_freq:
+                return key
+
+    def calc_s_n(self, sample_data):
+        # Вычисляет Sn.
+        #
+        # Parameters
+        # ----------
+        # sample_data : частота дикретизации.
+
+        for freq in DTMF_FREQ:
+            s = self.coeff[freq] * self.s_prev[freq] - self.s_prev2[freq] + sample_data
+            self.s_prev2[freq] = self.s_prev[freq]
+            self.s_prev[freq] = s
+
+    def calc_power(self) -> {float: float}:
+        # Вычисляет магнитуды частот.
+        #
+        # Returns
+        # -------
+        # powers : {float: float}
+        #     словарь частот и их магнитуд.
+
+        powers = {}
+
+        for freq in DTMF_FREQ:
+            power = self.s_prev2[freq] ** 2 + self.s_prev[freq] ** 2 - \
+                    self.coeff[freq] * self.s_prev[freq] * self.s_prev2[freq]
+            powers[freq] = power
+
+        return powers
+
+    def reset(self):
+        # Удаляет ранее посчитанные данные.
+
+        self.s_prev = {}
+        self.s_prev2 = {}
+
+        for k in DTMF_FREQ:
+            self.s_prev[k] = .0
+            self.s_prev2[k] = .0
+
+\end{lstlisting}
 
 %% В случае, когда таблица (рисунок) размещаются на последней странице, для переноса названия приложения на новую строку используем:
-\NewPage % начать новое приложение с новой страницы 
+%\NewPage % начать новое приложение с новой страницы 
